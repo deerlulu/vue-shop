@@ -45,7 +45,25 @@ export default new VueRouter({
   ]
 })
 
+//先把VueRouter原型对象的push，先保存一份
 const originalPush = VueRouter.prototype.push
-   VueRouter.prototype.push = function push(location) {
-   return originalPush.call(this, location).catch(err => err)
+const originalReplace = VueRouter.prototype.replace
+//重写push|replace
+//第一个参数：告诉原来push方法，你往哪里跳转（传递哪些参数）
+VueRouter.prototype.push = function(location, resolve, reject) {
+  if(resolve && reject) {
+    //call || apply: 相同点：都可以调用函数一次，都可以篡改函数的上下文一次
+    //不同点：call与apply传递参数：call传递参数用逗号隔开，apply方法执行传递数组
+    originalPush.call(this, location, resolve, reject)
+  } else {
+    originalPush.call(this, location, () => {}, () => {})
+  }
+}
+
+VueRouter.prototype.replace = function (location, resolve, reject) {
+  if(resolve && reject) {
+    originalReplace.call(this, location, resolve, reject)
+  } else {
+    originalReplace.call(this, location, () => {}, () => {})
+  }
 }
