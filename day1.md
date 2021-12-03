@@ -76,4 +76,74 @@ Footer【在首页、搜索页有，登录｜注册页面没有】
 注意2:咱们项目采用的less样式，浏览器不是别less样式，需要通过less,less-loader(安装5版本的)进行处理
 less,把less样式变为css样式，浏览器才可以识别
 
-注意想要组件识别less样式，需要在style标签上lang='less'
+注意3:想要组件识别less样式，需要在style标签上lang='less'
+
+4.1使用组件的步骤（非路由组件）
+-创建或者定义
+-引入
+-注册
+-使用
+
+5.路由组件的搭建
+vue-router
+在上面分析的时候，路由组件应该有4个：Home Search Login Register
+
+5.1配置路由
+项目中配置的路由 ---router文件夹
+
+5.2 总结
+路由组件与非路由组件的区别
+
+1:路由组件一般放置在pages｜views文件夹，非i路由组件放在components文件夹中
+2:路由组件一般需要在router文件夹中进行注册（使用的是组件的名字），非路由组件一般使用标签
+3:注册完路由，不管是路由组件还是非路由组件，身上都有$route、$router属性
+
+$route: 一般获取路由信息【路径，query，params等等】
+$router：一般进行编程式导航进行路由跳转【push|replace】
+
+5.3 路由的跳转
+路由的跳转有两种形式：
+声明式导航router-link,可以进行路由的跳转
+编程式导航push|replace,可以进行路由跳转
+
+编程式导航：声明式导航能做的，编程式导航都能做，但是编程式导航除了可以进行路由跳转，还可以做一些其他的业务逻辑
+
+6.footer组件的显示与隐藏
+footer组件： 在home和search页面显示,在login和register组件不显示
+
+6.1 可以使用 v-show="$route.path == '/home' || $route.path == '/search'"判断footer的显示与隐藏
+
+6.2 配置路由的时候，可以给路由添加路由元信息，key必须是meta
+
+7.路由传参 
+
+7.1路由跳转有几种方式：
+A--B
+声明式导航router-link（务必要有to属性）,可以进行路由的跳转
+编程式导航：利用$router.push|replace,可以进行路由跳转
+
+7.2路由传参,参数有几种写法？
+params参数：属于路径当中的一部分，需要注意，在配置路由的时候，需要占位
+query参数：不属于路径当中的一部分，类似于ajax中的queryString /home?k=v&k=v
+
+8. 路由传参相关面试题
+(1)路由传递参数（对象写法）path是否可以结合params参数一起使用?
+    答：路由跳转传参的时候，对象的写法可以是name，path形式。但是需要注意的是:path这种写法不能与params参数一起使用
+(2)如何指定params参数可传可不传？
+    比如：配置路由的时候，占位了（params参数）,但是路由跳转的时候就不传递。
+    路径就会出现问题
+    http://localhost:8080/#/?k=SHA
+
+    如何指定params可传可不传？
+    在配置路由的时候，在占位的后面加上一个问号，就可以确定url是正确的
+
+(3)params参数可以传递也可以不传递，但是如果传递的是空串，如何解决？
+    this.$router.push({name: 'search', params: { keyword: '' }, query: {k: keyword.toUpperCase()}})
+    路径就会出现问题
+    http://localhost:8080/#/?k=DA%20SA
+
+    如何解决：undefined
+    this.$router.push({name: 'search', params: { keyword: '' || undefined }, query: {k: keyword.toUpperCase()}})
+    http://localhost:8080/#/search?k=DSAAA
+
+(4)路由组件能不能传递props数据？
