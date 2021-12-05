@@ -30,3 +30,13 @@
   let $router = new VueRouter();
 
   $router.push(xxx)
+
+  2.Home组件模块组件
+  --先完成静态页面
+  --拆分出静态组件
+  --获取服务器数据进行展示
+  --动态业务
+
+  3.三级联动组件
+  --由于三级联动，home，search,detail模块都出现了,所以可以封装成一个组件
+
