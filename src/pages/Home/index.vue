@@ -1,11 +1,31 @@
 <template>
-  <div class="">我是首页</div>
+  <div class="">
+    <!-- 三级联动全局组件 已经注册为全局组件，因为不需要再引入，直接使用-->
+    <TypeNav/>
+    <ListContainer/>
+    <Recommend/>
+    <Rank/>
+    <Like/>
+    <Floor/>
+    <Floor/>
+  </div>
 </template>
 
 <script>
+import ListContainer from '@/pages/Home/ListContainer'
+import Recommend from '@/pages/Home/Recommend'
+import Rank from '@/pages/Home/Rank'
+import Like from '@/pages/Home/GuessLike'
+import Floor from '@/pages/Home/Floor'
 export default {
   name: "",
-  components: {},
+  components: {
+    ListContainer,
+    Recommend,
+    Rank,
+    Like,
+    Floor
+  },
   data() {
     return {};
   },
