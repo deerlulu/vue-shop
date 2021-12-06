@@ -8,6 +8,7 @@
     <Like/>
     <Floor/>
     <Floor/>
+    <Brand/>
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import Recommend from '@/pages/Home/Recommend'
 import Rank from '@/pages/Home/Rank'
 import Like from '@/pages/Home/GuessLike'
 import Floor from '@/pages/Home/Floor'
+import Brand from '@/pages/Home/Brand'
 export default {
   name: "",
   components: {
@@ -24,7 +26,8 @@ export default {
     Recommend,
     Rank,
     Like,
-    Floor
+    Floor,
+    Brand
   },
   data() {
     return {};
@@ -38,5 +41,5 @@ export default {
   mounted() {},
 };
 </script>
-<style lang='scss' scoped>
+<style lang='less' scoped>
 </style>

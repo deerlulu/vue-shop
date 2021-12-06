@@ -40,3 +40,30 @@
   3.三级联动组件
   --由于三级联动，home，search,detail模块都出现了,所以可以封装成一个组件
   4.完成其余组件的拆分
+
+  5.postman测试接口
+  /api/product/getBaseCategoryList
+  --刚刚经过postman测试,接口没有问题，数据正常返回，code:200代表服务器返回数据成功
+  --整个项目接口的前缀都有api
+
+  6.axios二次封装
+    XMLHttpRequest fetch jq axios
+  6.1 为什么需要axios二次封装
+  请求拦截器：在发请求之前处理一些业务
+  响应拦截器：当服务器数据返回以后，可以处理一些事情
+
+  6.2在项目中经常有API文件夹【axios】
+  接口中：路径中都带有/api
+  baseURL: "/api"
+  
+  6.3 axios基础不好，参考git或者axios文档
+
+  7.接口统一管理
+  项目很小：完全可以在组件的生命周期函数中去发请求
+
+  项目大：axios.get('xxxx')
+  7.1跨域问题
+  什么是跨域问题：协议，域名，端口不同
+  http://localhost:8080/#/home 前端的服务器
+
+  http://39.98.123.211 服务器
