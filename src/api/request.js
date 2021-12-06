@@ -1,5 +1,7 @@
 // 对axios进行二次封装
 import axios from 'axios'
+//引入进度条
+import nprogress from 'nprogress'
 
 //1.利用axios对象的方法create创建一个axios实例
 //2.request：就是axios，只不过需要稍微配置一下
@@ -14,6 +16,8 @@ const requests = axios.create({
 //请求拦截器：在发请求之前，请求拦截器可以检测到，可以在请求发出去之前做一些事情
 requests.interceptors.request.use((config) => {
   //config:配置对象，对象中有一个属性很重要，headers请求头
+  //进度条开始动
+  nprogress.start()
   return config
 })
 
@@ -23,6 +27,8 @@ requests.interceptors.response.use((res) => {
 },(error) => {
   //响应失败的回调函数
   //中止promise链
+  //进度条结束
+  nprogress.done()
   return Promise.reject(new Error("fail"))
 })
 

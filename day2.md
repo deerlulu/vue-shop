@@ -67,3 +67,7 @@
   http://localhost:8080/#/home 前端的服务器
 
   http://39.98.123.211 服务器
+
+  8.nprogress 进度条插件
+  //start:进度条开始动
+  //done:进度条结束
