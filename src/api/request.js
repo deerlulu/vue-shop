@@ -2,6 +2,8 @@
 import axios from 'axios'
 //引入进度条
 import nprogress from 'nprogress'
+// 引入样式
+import 'nprogress/nprogress.css'
 
 //1.利用axios对象的方法create创建一个axios实例
 //2.request：就是axios，只不过需要稍微配置一下

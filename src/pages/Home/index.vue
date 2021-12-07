@@ -19,6 +19,8 @@ import Rank from '@/pages/Home/Rank'
 import Like from '@/pages/Home/GuessLike'
 import Floor from '@/pages/Home/Floor'
 import Brand from '@/pages/Home/Brand'
+
+import { mapState } from 'vuex'
 export default {
   name: "",
   components: {
@@ -32,9 +34,12 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+  },
   watch: {},
-  methods: {},
+  methods: {
+    
+  },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
