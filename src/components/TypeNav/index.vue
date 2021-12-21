@@ -45,6 +45,8 @@
 
 <script>
 import {mapState} from 'vuex'
+//是把lodash全部功能函数引入
+import throttle from 'lodash';
 export default {
   name: 'TypeNav',
   //组件挂载完毕：可以向服务器发请求
@@ -70,11 +72,14 @@ export default {
   watch: {},
   methods: {
     //鼠标进入修改响应式数据currentIndex
-    changeIndex(index) {
-      //index:鼠标移上某一个一级菜单的某一个位置
+    // changeIndex(index) {
+    //   //index:鼠标移上某一个一级菜单的某一个位置
+    //   this.currentIndex = index
+    //   console.log(index)
+    // },
+    changeIndex: throttle(function(index){
       this.currentIndex = index
-      console.log(index)
-    },
+    }, 50),
     leaveIndex() {
       this.currentIndex = -1
     }
