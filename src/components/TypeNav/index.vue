@@ -5,20 +5,20 @@
       <div @mouseleave="leaveIndex">
         <h2 class="all">全部商品分类</h2>
         <div class="sort">
-          <div class="all-sort-list2">
+          <div class="all-sort-list2" @click="goSearch">
             <div class="item" v-for="(c1,index) in categoryList" :key="c1.categoryId" :class="{cur:currentIndex == index}">
               <h3 @mouseenter="changeIndex(index)">
-                <a href="">{{c1.categoryName}}</a>
+                <a :data-categoryname="c1.categoryName" :data-category1id="c1.categoryId">{{c1.categoryName}}</a>
               </h3>
               <div class="item-list clearfix" :style="{display: currentIndex===index ? 'block': 'none'}">
                 <div class="subitem" v-for="(c2, index) in c1.categoryChild" :key="c2.categoryId">
                   <dl class="fore">
                     <dt>
-                      <a href="">{{c2.categoryName}}</a>
+                      <a :data-categoryname="c2.categoryName" :data-category2id="c2.categoryId">{{c2.categoryName}}</a>
                     </dt>
                     <dd>
                       <em v-for="(c3, index) in c2.categoryChild" :key="c3.categoryId">
-                        <a href="">{{c3.categoryName}}</a>
+                        <a :data-categoryname="c3.categoryName" :data-category3id="c3.categoryId">{{c3.categoryName}}</a>
                       </em>
                     </dd>
                   </dl>
@@ -82,6 +82,33 @@ export default {
     }, 50),
     leaveIndex() {
       this.currentIndex = -1
+    },
+    //进行路由跳转的方法
+    goSearch(event) {
+      //最好的解决方案：编程式导航+事件委派
+      //利用事件委派存在一些问题：1:点击一定是a标签 2:如何获取参数【1，2，3级产品名字】
+      //解决： 把子节点当中的a标签，加上自定义属性data-catetoryName，其余的子节点都是没有的
+      let element = event.target;
+      //节点有一个dataset属性，可以获取节点的自定义属性与属性值
+      let { categoryname, category1id, category2id, category3id } = element.dataset;
+      console.log('element.dataset', element.dataset)
+      if(categoryname) {
+        //怎么知道是几级分类的
+        //整理路由跳转的参数
+          let location = {name: 'search'};
+          let query = {categoryName: categoryname}
+        if(category1id){
+          query.category1Id = category1id;
+        }else if(category2id){
+          query.category2Id = category2id;
+        }else{
+          query.category3Id = category3id;
+        }
+        // 整理完参数
+        location.query = query;
+        //路由跳转
+        　this.$router.push(location)
+      }
     }
   },
   components: {},
